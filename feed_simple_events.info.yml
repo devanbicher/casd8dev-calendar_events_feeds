@@ -1,0 +1,13 @@
+name: CAS Events Feed and Simple Event Content Type
+description: Includes both feeds from the Lehigh events calendar and the simple event content that can handle both feeds' information.
+package: Custom
+
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+
+dependencies:
+  - geolocation
+  - feeds
+  - feeds_ex
+  - datetime_range
