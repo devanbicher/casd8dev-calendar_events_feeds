@@ -1,0 +1,48 @@
+<?php
+
+use Drupal\node\Entity\Node;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+
+
+function calendar_events_feeds_entity_presave(EntityInterface $entity){
+     \Drupal::messenger()->addError("Devan did something in the presave function");
+
+    if ($entity->getEntityTypeId() == 'node'){
+        if ($entity->bundle() == 'calendar_event'){
+
+            $dates_array = $entity->get('field_ranged_date')->getValue();
+
+            if ( is_null($dates_array[0]['end_value'])){
+
+                $start_date = $dates_array[0]['value'];
+                $dates_array[0]['end_value'] = $start_date;
+                $entity->get('field_ranged_date')->setValue($dates_array);
+            }
+        }
+    }
+}
+
+function fix_end_date_validate_handler(&$form, FormStateInterface $form_state) {
+
+    \Drupal::messenger()->addError("Devan did something in a custom form handler function");
+
+    if( is_null($form_state->getValue('field_ranged_date')[0]['end_value'] ) ){
+        if( isset($form_state->getValue('field_ranged_date')[0]['value'])) {
+            $date_array = [];
+            $date_array['field_ranged_date'] = $form_state->getValue('field_ranged_date');
+            $start_value = $form_state->getValue('field_ranged_date')[0]['value'];
+            $date_array['field_ranged_date'][0]['end_value'] = $start_value;
+            
+            $form_state->setValue(array('field_ranged_date',0,'end_value'),$start_value); 
+        }
+    }
+}
+
+function calendar_events_feeds_form_node_calendar_event_edit_form_alter(&$form, FormStateInterface $form_state, $form_id){
+    \Drupal::messenger()->addError("Devan did something in form alter");
+    $form['#validate'][0] = 'fix_end_date_validate_handler';
+    $form['#validate'][1] = '::validateForm';
+}
