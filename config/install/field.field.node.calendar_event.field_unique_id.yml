@@ -8,8 +8,8 @@ id: node.calendar_event.field_unique_id
 field_name: field_unique_id
 entity_type: node
 bundle: calendar_event
-label: 'Event GUID'
-description: 'This field is only used for events pulled in from the Lehigh Events calendar.'
+label: 'Unique ID'
+description: 'This field is only used for events pulled in from the Lehigh Events calendar. Used with RSS/XML Event GUID or ID repectively'
 required: false
 translatable: false
 default_value: {  }
