@@ -11,3 +11,4 @@ dependencies:
   - datetime_range
   - menu_ui
   - node
+  - views
