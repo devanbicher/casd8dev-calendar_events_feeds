@@ -1,4 +1,4 @@
-name: 'CAS Events Feed and Calendar Event Content Type for storing and displaying'
+name: 'Calendar Event Content Type and CAS Events Feeds'
 description: 'Includes both feeds from the Lehigh events calendar and the Calendar Event content that can handle both feeds'' information.'
 package: Custom
 type: module
