@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ranged_date
+    - node.type.calendar_event
+  module:
+    - datetime_range
+id: node.calendar_event.field_ranged_date
+field_name: field_ranged_date
+entity_type: node
+bundle: calendar_event
+label: 'Ranged Date'
+description: 'If there is no end date for your event, please enter the start date into the end date field, (delete this message if you do this automatically)'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

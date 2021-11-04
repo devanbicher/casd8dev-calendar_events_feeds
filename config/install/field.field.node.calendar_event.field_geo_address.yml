@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_geo_address
+    - node.type.calendar_event
+  module:
+    - geolocation
+id: node.calendar_event.field_geo_address
+field_name: field_geo_address
+entity_type: node
+bundle: calendar_event
+label: 'Geo Address'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: geolocation

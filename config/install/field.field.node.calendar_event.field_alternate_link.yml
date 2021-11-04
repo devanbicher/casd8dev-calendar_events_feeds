@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_alternate_link
+    - node.type.calendar_event
+  module:
+    - link
+id: node.calendar_event.field_alternate_link
+field_name: field_alternate_link
+entity_type: node
+bundle: calendar_event
+label: 'Alternate Link'
+description: 'This Link field is always a link to the calendar event item on the Lehigh calendar. Whatever link you put here will display as ''View on the Lehigh Calendar''. '
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link

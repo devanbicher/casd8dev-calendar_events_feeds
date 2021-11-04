@@ -1,0 +1,164 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.calendar_event.body
+    - field.field.node.calendar_event.field_alternate_link
+    - field.field.node.calendar_event.field_unique_id
+    - field.field.node.calendar_event.field_geo_address
+    - field.field.node.calendar_event.field_image_file
+    - field.field.node.calendar_event.field_ranged_date
+    - node.type.calendar_event
+  module:
+    - feeds_ex
+    - geolocation
+    - node
+id: lehigh_events_calendar_rss_feed
+label: 'Lehigh Events Calendar RSS Feed'
+description: ''
+help: ''
+import_period: 3600
+fetcher: http
+fetcher_configuration:
+  auto_detect_feeds: false
+  use_pubsubhubbub: false
+  always_download: false
+  fallback_hub: ''
+  request_timeout: 30
+parser: xml
+parser_configuration:
+  context:
+    value: /rss/channel/item
+  sources:
+    geo_lat:
+      label: 'geo:lat'
+      value: 'geo:lat'
+    geo_long:
+      label: 'geo:long'
+      value: 'geo:long'
+    description:
+      label: description
+      value: description
+    title:
+      label: title
+      value: title
+    guid:
+      label: guid
+      value: guid
+    link:
+      label: link
+      value: link
+    media_content_url:
+      label: 'media:content/@url'
+      value: 'media:content/@url'
+    pubdate:
+      label: pubDate
+      value: pubDate
+  use_tidy: false
+  display_errors: false
+  source_encoding:
+    - auto
+  debug_mode: false
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  langcode: en
+  update_existing: 2
+  update_non_existent: _keep
+  expire: -1
+  owner_feed_author: false
+  owner_id: 4
+  authorize: true
+  skip_hash_check: false
+  values:
+    type: calendar_event
+custom_sources:
+  geo_lat:
+    label: 'geo:lat'
+    value: 'geo:lat'
+    machine_name: geo_lat
+  geo_long:
+    label: 'geo:long'
+    value: 'geo:long'
+    machine_name: geo_long
+  description:
+    label: description
+    value: description
+    machine_name: description
+  title:
+    label: title
+    value: title
+    machine_name: title
+  guid:
+    label: guid
+    value: guid
+    machine_name: guid
+  pubdate:
+    label: pubDate
+    value: pubDate
+    machine_name: pubdate
+  link:
+    label: link
+    value: link
+    machine_name: link
+  media_content_url:
+    label: 'media:content/@url'
+    value: 'media:content/@url'
+    machine_name: media_content_url
+mappings:
+  -
+    target: field_geo_address
+    map:
+      lat: geo_lat
+      lng: geo_long
+    settings:
+      language: null
+  -
+    target: body
+    map:
+      value: description
+      summary: ''
+    settings:
+      language: ''
+      format: basic_html
+  -
+    target: title
+    map:
+      value: title
+    unique: {  }
+    settings:
+      language: null
+  -
+    target: field_unique_id
+    map:
+      value: guid
+    unique:
+      value: '1'
+    settings:
+      language: null
+  -
+    target: field_alternate_link
+    map:
+      uri: link
+      title: link
+    settings:
+      language: null
+  -
+    target: field_image_file
+    map:
+      target_id: media_content_url
+      alt: ''
+      title: ''
+    settings:
+      existing: 2
+      language: null
+      reference_by: filename
+      autocreate: false
+  -
+    target: field_ranged_date
+    map:
+      value: pubdate
+      end_value: pubdate
+    settings:
+      language: null
+      timezone: UTC

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_registration_link
+    - node.type.calendar_event
+  module:
+    - link
+id: node.calendar_event.field_registration_link
+field_name: field_registration_link
+entity_type: node
+bundle: calendar_event
+label: 'Primary Link'
+description: 'This Link field is always for the registration link. Whatever link you put here will display as ''Register for Virtual Event'''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 1
+field_type: link
