@@ -12,11 +12,10 @@ function calendar_events_feeds_entity_presave(EntityInterface $entity){
 
     if ($entity->getEntityTypeId() == 'node'){
         if ($entity->bundle() == 'calendar_event'){
-
+            
             $dates_array = $entity->get('field_ranged_date')->getValue();
 
-            if ( is_null($dates_array[0]['end_value'])){
-
+            if ( empty($dates_array[0]['end_value'])){
                 $start_date = $dates_array[0]['value'];
                 $dates_array[0]['end_value'] = $start_date;
                 $entity->get('field_ranged_date')->setValue($dates_array);
