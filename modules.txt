@@ -1,4 +1,0 @@
-goelocation
-feeds
-feeds_ex
-datetime_range
