@@ -6,9 +6,9 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\NodeInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 
+// add error message:  \Drupal::messenger()->addError("Devan did something in the presave function");
 
 function calendar_events_feeds_entity_presave(EntityInterface $entity){
-     \Drupal::messenger()->addError("Devan did something in the presave function");
 
     if ($entity->getEntityTypeId() == 'node'){
         if ($entity->bundle() == 'calendar_event'){
@@ -26,8 +26,6 @@ function calendar_events_feeds_entity_presave(EntityInterface $entity){
 
 function fix_end_date_validate_handler(&$form, FormStateInterface $form_state) {
 
-    \Drupal::messenger()->addError("Devan did something in a custom form handler function");
-
     if( is_null($form_state->getValue('field_ranged_date')[0]['end_value'] ) ){
         if( isset($form_state->getValue('field_ranged_date')[0]['value'])) {
             $date_array = [];
@@ -41,7 +39,6 @@ function fix_end_date_validate_handler(&$form, FormStateInterface $form_state) {
 }
 
 function calendar_events_feeds_form_node_calendar_event_edit_form_alter(&$form, FormStateInterface $form_state, $form_id){
-    \Drupal::messenger()->addError("Devan did something in form alter");
     $form['#validate'][0] = 'fix_end_date_validate_handler';
     $form['#validate'][1] = '::validateForm';
 }
